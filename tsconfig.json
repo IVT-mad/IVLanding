@@ -24,7 +24,8 @@
 			"@sections/*": ["src/sections/*"],
 			"@layouts/*": ["src/layouts/*"],
 			"@ui/*": ["src/ui/*"],
-			"@types/*": ["src/types/*"]
+			"@types/*": ["src/types/*"],
+			"@styles/*": ["src/styles/*"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,3 +1,5 @@
+import './globals.css'
+
 export const metadata = {
 	title: 'IVLanding',
 	description: 'Personal landing page of IV',

@@ -6,6 +6,7 @@ module.exports = {
 		'./src/sections/**/*.{ts,tsx}',
 		'./src/layouts/**/*.{ts,tsx}',
 		'./src/ui/**/*.{ts,tsx}',
+		'./pages/**/*.{ts,tsx}',
 	],
 	theme: {
 		extend: {},
