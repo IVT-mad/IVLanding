@@ -1,73 +1,94 @@
 'use client'
-
-import { AnimatePresence, motion } from 'framer-motion'
+import DropdownMenu from '@components/DropdownMenu'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
 const navLinks = [
-	{ href: '/', label: 'Home' },
-	{ href: '/about', label: 'About' },
-	{ href: '/projects', label: 'Projects' },
-	{ href: '/contact', label: 'Contact' },
+	{ href: '#about', label: 'About' },
+	{ href: '#features', label: 'Features' },
+	{ href: '#pricing', label: 'Pricing' },
+	{ href: '#faq', label: 'FAQ' },
+	{ href: '#contact', label: 'Contact' },
+	{ href: 'https://github.com/IVT-mad', label: 'GitHub' },
 ]
 
 export default function Header() {
-	const [isOpen, setIsOpen] = useState(false)
-	const router = useRouter()
+	const [menuOpen, setMenuOpen] = useState(false)
+	const pathname = usePathname()
+
+	useEffect(() => {
+		const hour = new Date().getHours()
+		const isNight = hour >= 20 || hour < 7
+		document.documentElement.classList.toggle('dark', isNight)
+	}, [])
 
 	return (
-		<header className='fixed top-0 left-0 w-full z-50 bg-white shadow-md'>
-			<div className='max-w-6xl mx-auto px-4 py-3 flex items-center justify-between'>
-				<Link href='/' className='text-xl font-bold'>
-					IVLanding
-				</Link>
-
-				<nav className='hidden md:flex gap-6'>
-					{navLinks.map(link => (
-						<Link
-							key={link.href}
-							href={link.href}
-							className={`transition-colors duration-300 font-medium ${
-								router.pathname === link.href ? 'text-blue-600' : ''
-							} hover:text-blue-500`}
-						>
-							{link.label}
-						</Link>
-					))}
-				</nav>
-
-				<button
-					aria-label='Toggle navigation'
-					aria-expanded={isOpen}
-					onClick={() => setIsOpen(prev => !prev)}
-					className='md:hidden text-2xl'
-				>
-					☰
-				</button>
-			</div>
-
-			<AnimatePresence>
-				{isOpen && (
-					<motion.nav
-						initial={{ opacity: 0, y: -10 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -10 }}
-						className='md:hidden bg-white shadow-md px-4 pb-4 flex flex-col gap-3'
+		<header className='fixed top-0 left-0 w-full z-50 border-b border-prussian-blue bg-papaya-whip/90 dark:border-licorice dark:bg-licorice/90 backdrop-blur'>
+			<div className='mx-auto max-w-6xl px-4 sm:px-6 lg:px-8'>
+				<div className='flex h-16 items-center justify-between'>
+					{/* Logo */}
+					<Link
+						href='/'
+						className='text-xl font-bold text-barn-red dark:text-orange-web'
 					>
+						IVLanding
+					</Link>
+
+					{/* Desktop nav */}
+					<nav className='hidden md:flex gap-6 text-sm font-medium'>
 						{navLinks.map(link => (
 							<Link
 								key={link.href}
 								href={link.href}
-								className='hover:text-blue-500 transition-colors duration-300'
-								onClick={() => setIsOpen(false)}
+								className={`transition-colors hover:text-air-superiority-blue dark:hover:text-orange-web ${
+									pathname === link.href
+										? 'text-fire-brick dark:text-rust'
+										: 'text-prussian-blue dark:text-papaya-whip'
+								}`}
 							>
 								{link.label}
 							</Link>
 						))}
-					</motion.nav>
+					</nav>
+
+					{/* Visual test block */}
+					<div className='bg-barnRed text-papayaWhip p-4 rounded'>
+						🔥 This should be red bg with light text
+					</div>
+					<div className='bg-red-500 text-white p-4'>Test</div>
+
+					{/* Avatar */}
+					<div className='hidden md:block relative'>
+						<button className='overflow-hidden rounded-full border border-prussian-blue dark:border-orange-web shadow-inner'>
+							<img
+								src='https://avatars.githubusercontent.com/u/125467624?v=4'
+								alt='User avatar'
+								className='w-10 h-10 object-cover'
+							/>
+						</button>
+					</div>
+
+					{/* Mobile Menu */}
+					<DropdownMenu navLinks={navLinks} />
+				</div>
+
+				{/* Legacy fallback menu */}
+				{menuOpen && (
+					<div className='md:hidden mt-2 space-y-2'>
+						{navLinks.map(link => (
+							<Link
+								key={link.href}
+								href={link.href}
+								className='block px-4 py-2 rounded-md text-sm bg-papaya-whip text-prussian-blue dark:bg-licorice dark:text-papaya-whip'
+								onClick={() => setMenuOpen(false)}
+							>
+								{link.label}
+							</Link>
+						))}
+					</div>
 				)}
-			</AnimatePresence>
+			</div>
 		</header>
 	)
 }

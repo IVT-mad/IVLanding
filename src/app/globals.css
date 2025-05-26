@@ -1,17 +1,17 @@
-@import 'tailwindcss/preflight';
-@import 'tailwindcss';
-
+@tailwind base;
+@tailwind components;
 @tailwind utilities;
 
 html {
 	scroll-behavior: smooth;
-	padding: 0;
 	margin: 0;
+	padding: 0;
 }
+
 body {
 	@apply font-sans bg-white text-gray-900;
-	padding: 0;
 	margin: 0;
+	padding: 0;
 }
 
 h1,
@@ -21,4 +21,8 @@ h4,
 h5,
 h6 {
 	@apply font-semibold;
+}
+
+h1 {
+	@apply text-4xl;
 }

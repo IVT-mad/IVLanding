@@ -1,0 +1,29 @@
+.
+├── eslint.config.mjs
+├── LICENSE
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── README.md
+├── src
+│   ├── app
+│   │   ├── _app.tsx
+│   │   ├── globals.css
+│   │   ├── index.tsx
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   │   └── DropdownMenu.tsx
+│   ├── layouts
+│   ├── sections
+│   │   ├── Header.tsx
+│   │   └── Hero.tsx
+│   ├── styles
+│   ├── types
+│   └── ui
+├── structure.txt
+├── tailwind.config.js
+└── tsconfig.json
+
+9 directories, 18 files
